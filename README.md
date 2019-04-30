@@ -29,7 +29,7 @@ Hook it up to the chip like this:
 |   5   |    11   |
 |   6   |    13   |
 |   7   |  3.3V   |
-|   8   |   3.3V  |
+|   8   |  3.3V   |
 
 Open a serial terminal and connect to your programmed Arduino at 115200 8N1, enable logging to file, press a key and wait.
 Once your log file is exactly 512KiB in size, you're done.
@@ -38,12 +38,16 @@ Once your log file is exactly 512KiB in size, you're done.
 This information isn't verified yet !
 
 * 0x00000: Unknown, version ?
+* 0x00001: Index to startup script ?, *16 for effective address
+* 0x00003: Other index ?
+* 0x00005: Other index ?
 * 0x00080: Script index for each sound (bytes), *16 for effective address
 * 0x00100: Sound data pointer list. Groups of 3 bytes:
   * 1st: 64kiB bank number OR 0xB0
   * 2st: Byte address LSB
   * 3st: Byte address MSB
-* 0x00120: ?
+* 0x00120: Startup script ?
+  * `0x05 NN`: Call indirect ?
 * 0x00140: Script data for each sound ? 16-byte blocks
   * `0x02 NN`: ?
   * `0x04 NN`: Start playing sound from NN ?
